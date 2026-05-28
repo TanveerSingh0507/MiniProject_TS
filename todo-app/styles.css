@@ -1,0 +1,361 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+}
+
+.todo-wrapper {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    padding: 40px 30px;
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.subtitle {
+    color: #999;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+/* Input Section */
+.input-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.todo-input {
+    flex: 1;
+    padding: 15px 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    font-family: inherit;
+}
+
+.todo-input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.add-btn {
+    padding: 15px 35px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    white-space: nowrap;
+}
+
+.add-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.add-btn:active {
+    transform: translateY(0);
+}
+
+/* Filter Section */
+.filter-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.filter-btn {
+    padding: 8px 20px;
+    border: 2px solid #e0e0e0;
+    background: white;
+    color: #666;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.filter-btn:hover {
+    border-color: #667eea;
+    color: #667eea;
+}
+
+.filter-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: transparent;
+}
+
+/* Stats Section */
+.stats-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.stat {
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    color: #999;
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    display: block;
+    color: #667eea;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+/* Todo List */
+.todo-list {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    gap: 15px;
+    transition: all 0.3s;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.todo-item:hover {
+    background: #f0f0f0;
+    transform: translateX(5px);
+}
+
+.todo-item.completed .todo-text {
+    text-decoration: line-through;
+    color: #999;
+}
+
+.checkbox {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    accent-color: #667eea;
+}
+
+.todo-text {
+    flex: 1;
+    color: #333;
+    font-size: 1rem;
+    word-break: break-word;
+    transition: all 0.3s;
+}
+
+.todo-priority {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.todo-priority.high {
+    background: #ffebee;
+    color: #d32f2f;
+}
+
+.todo-priority.medium {
+    background: #fff3e0;
+    color: #f57c00;
+}
+
+.todo-priority.low {
+    background: #e8f5e9;
+    color: #388e3c;
+}
+
+.delete-btn {
+    padding: 6px 12px;
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s;
+}
+
+.delete-btn:hover {
+    background: #ff5252;
+    transform: scale(1.05);
+}
+
+.delete-btn:active {
+    transform: scale(0.95);
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #999;
+    display: none;
+}
+
+.empty-state.show {
+    display: block;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.empty-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    opacity: 0.5;
+}
+
+.empty-state p {
+    font-size: 1.1rem;
+}
+
+/* Action Section */
+.action-section {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.clear-btn,
+.delete-all-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.clear-btn {
+    background: #e8f5e9;
+    color: #388e3c;
+}
+
+.clear-btn:hover {
+    background: #c8e6c9;
+}
+
+.delete-all-btn {
+    background: #ffebee;
+    color: #d32f2f;
+}
+
+.delete-all-btn:hover {
+    background: #ffcdd2;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .todo-wrapper {
+        padding: 25px 20px;
+    }
+
+    .header h1 {
+        font-size: 2rem;
+    }
+
+    .input-section {
+        flex-direction: column;
+    }
+
+    .add-btn {
+        width: 100%;
+    }
+
+    .filter-section {
+        flex-wrap: wrap;
+    }
+
+    .stats-section {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .todo-item {
+        flex-wrap: wrap;
+    }
+
+    .action-section {
+        flex-direction: column;
+    }
+
+    .clear-btn,
+    .delete-all-btn {
+        width: 100%;
+    }
+}
