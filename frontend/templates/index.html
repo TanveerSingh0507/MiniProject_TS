@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TruthGuard - Fake News Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<body>
+    <div class="animated-bg"></div>
+    <div class="particles-overlay"></div>
+    
+    <nav class="navbar">
+        <div class="logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M9 12l2 2 4-4"></path></svg>
+            TruthGuard
+        </div>
+        <div class="nav-links">
+            <a href="#check-news">Check News</a>
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How it Works</a>
+            <a href="#about-us">About Us</a>
+            <a href="#contact">Contact</a>
+            <button class="btn-login" id="loginBtnNav">Log In</button>
+        </div>
+    </nav>
+
+    <!-- Main Analysis App -->
+    <main class="hero" id="check-news">
+        <h1>Verify. Detect. trust. analyze news with confidence.</h1>
+        <p class="subtitle">Instantly detect potential misinformation, bias, and fake news articles using AI and verified sources.</p>
+
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="newsInput" placeholder="Paste a news article URL (link) or full headline/text here to analyze...">
+                <button id="checkBtn" class="btn-analyze">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="analyze-icon"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><circle cx="12" cy="11" r="3"></circle></svg>
+                    <span class="btn-text">Analyze Now</span>
+                    <span class="loader hidden"></span>
+                </button>
+            </div>
+            <p class="detects-text">Detects reliability, bias, and fact-checks instantly.</p>
+        </div>
+
+        <div id="resultSection" class="result-section hidden">
+            <div class="latest-checks-header">
+                <h3>Analysis Results:</h3>
+            </div>
+            <div class="dashboard-grid">
+                <div class="trust-indicators">
+                    <h4>Trust Indicators:</h4>
+                    <ul>
+                        <li>Source Credibility <span class="indicator-score credibility">Machine Checked</span></li>
+                        <li>Factuality <span class="indicator-score factuality" id="factualityScore">--</span></li>
+                        <li>Bias Check <span class="indicator-score bias">Neutral</span></li>
+                        <li>Writing Style <span class="indicator-score style">Analyzed</span></li>
+                    </ul>
+                </div>
+                
+                <div class="cards-container">
+                    <div class="result-card" id="mainResultCard">
+                        <div class="card-header">
+                            <div class="icon verified">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            </div>
+                            <h5 id="cardTitle">Authentic Content</h5>
+                        </div>
+                        <p class="card-desc" id="cardDesc">Independent analysis confirms the reliability of this text based on our ML model.</p>
+                        <p class="card-source"><strong>Model:</strong> ML Classifier</p>
+                        <p class="card-score"><strong>Trust Score:</strong> <br><span class="score-text green" id="trustScoreText">High Reliability - Green</span></p>
+                        <a href="#" class="details-link analysis-modal-trigger">Analysis Details ↗</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="latestChecksSection" class="result-section">
+            <div class="latest-checks-header">
+                <h3>Your Latest Checks:</h3>
+            </div>
+            <div class="dashboard-grid" style="display: block;">
+                <div class="cards-container" id="historyCardsContainer">
+                    <p class="subtitle" id="historyMsg" style="margin-bottom: 2rem; font-size: 1rem;">Please log in to view your recent checks.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Marketing / Informational Sections -->
+    <section class="info-section" id="features">
+        <div class="info-content">
+            <h2>Features</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>Deep ML Analysis</h3>
+                    <p>Our model is trained on over 6,000 real fact-checked and confirmed fake news articles utilizing TF-IDF Vectorization and Passive-Aggressive Classifiers.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Real-Time Evaluation</h3>
+                    <p>Our robust Flask backend processes requests synchronously and delivers nearly instant reliability insights.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Source Checking</h3>
+                    <p>Soon to be integrated with live search APIs to cross-reference headlines directly against trusted journalism databases.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-section alternate" id="how-it-works">
+        <div class="info-content">
+            <h2>How It Works</h2>
+            <p style="text-align:center; max-width: 800px; margin: 0 auto 2rem auto;">TruthGuard uses advanced Natural Language Processing to detect patterns common in misinformation.</p>
+            <ol class="steps">
+                <li><strong>1. Input Text:</strong> You provide the article text or headline.</li>
+                <li><strong>2. AI Processing:</strong> We tokenize the words and evaluate their usage frequencies (TF-IDF).</li>
+                <li><strong>3. Verdict:</strong> A mathematical margin evaluates it against our trained dataset matrix.</li>
+                <li><strong>4. Insights:</strong> You are provided a final output of either Authentic or Fake.</li>
+            </ol>
+        </div>
+    </section>
+
+    <section class="info-section" id="about-us">
+        <div class="info-content">
+            <h2>About Us</h2>
+            <p style="text-align:center; max-width: 800px; margin: 0 auto;">We are a passionate team of B.Tech CSE students bringing together Web Technologies and Artificial Intelligence. TruthGuard is our 3rd Year Mini Project built to tackle one of modern society's largest challenges: the rapid spread of misinformation.</p>
+        </div>
+    </section>
+
+    <section class="info-section alternate" id="contact">
+        <div class="info-content" style="text-align:center;">
+            <h2>Contact</h2>
+            <p>If you have any feedback or wish to contribute to our dataset, get in touch!</p>
+            <button class="btn-primary" style="margin-top: 1.5rem;" id="contactBtn">Email Us</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>TruthGuard &copy; 2026 | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | Verify responsibly</p>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal hidden" id="loginModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeLogin">&times;</button>
+            <h3 class="modal-title" id="loginModalTitle">Log In to TruthGuard</h3>
+            <p id="loginModalDesc">Enter your credentials below.</p>
+            <input type="text" class="modal-input" id="loginEmail" placeholder="Email Address">
+            <input type="password" class="modal-input" id="loginPassword" placeholder="Password">
+            <button class="btn-primary" id="submitLogin">Sign In</button>
+            <p style="text-align: center; margin-top: 1rem; color: var(--text-secondary); font-size: 0.9rem;">
+                <span id="toggleAuthText">Don't have an account? </span><a href="#" id="toggleAuthMode" style="color: var(--accent-purple);">Register</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="modal hidden" id="analysisModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeAnalysis">&times;</button>
+            <h3 class="modal-title">Detailed ML Analysis</h3>
+            <div class="analysis-stats">
+                <p><strong>Vector Dimensions:</strong> 25,321 tokens processed.</p>
+                <p><strong>Model Loss Iterations:</strong> 50</p>
+                <p><strong>Text Properties:</strong> Evaluated for sensationalist capitalization, syntax phrasing, and unverified source structures.</p>
+                <p style="margin-top: 1rem; color: var(--accent-blue);"><em>More granular feature importance highlights will be available in V2.</em></p>
+            </div>
+            <button class="btn-primary" id="ackAnalysis">Acknowledge</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
